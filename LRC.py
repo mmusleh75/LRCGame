@@ -99,10 +99,10 @@ def main():
     players = []
 
     # ask the user how many players are in the game.
-    numberOfPlayer = 3 #input("Number of players?")
+    numberOfPlayer = input("Number of players?")
     for i in range(int(numberOfPlayer)):
         # then ask for player names as you add each new player to the list
-        playerName = f"player-{i}" #input("player "+str(i)+" name?")
+        playerName = input("player "+str(i)+" name?")
         playerObject = Player(playerName)
         players.append(playerObject)
 
