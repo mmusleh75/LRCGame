@@ -25,13 +25,13 @@ Your program:
 * Move chips around via player objects (this is where OOP comes in)
 * For each player turn, print the dice roll. Then print status of each player and the center.
 
-'''
+~~~~
 Roll: R,C,-
 Player1 has 3 chips.
 Player2 has 2 chips.
 Player3 has 2 chips.
 Center has 2 chips.
-'''
+~~~~
  
 • FYI – the total number of chips is always the number of players * 3. This is a good way to check your program as it runs.
 • When the game is over, print out who the winner is.
