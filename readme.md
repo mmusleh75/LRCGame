@@ -1,1 +1,1 @@
-[Left-Right-Center Game](LRC-Game)
+[Left-Right-Center Game](lrc-game)
