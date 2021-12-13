@@ -13,13 +13,7 @@ class Player():
 
 guessList = ["Odd", "Even"]
 
-def GameOver():
-    if bot1.getMarbles() > 0 and bot2.getMarbles() > 0:
-        return False
-    else:
-        return True
-
-def Roll(playingBot, opponentBot):
+def Play(playingBot, opponentBot):
     print(f"{bot1.getName()} has {bot1.getMarbles()}")
     print(f"{bot2.getName()} has {bot2.getMarbles()}")
 
@@ -55,8 +49,8 @@ def Roll(playingBot, opponentBot):
 
 if __name__ == "__main__":
 
-    bot1 = Player("John", 1000)
-    bot2 = Player("Steve", 1000)
+    bot1 = Player("John", 50)
+    bot2 = Player("Steve", 50)
 
     # the values for the two players can be replaced with input()
 
@@ -64,20 +58,20 @@ if __name__ == "__main__":
     while True:
 
         if bot1.getMarbles() > 0:
-            Roll(bot1, bot2)
+            Play(bot1, bot2)
             rotation += 1
-            if GameOver():
+            if bot1.getMarbles() == 0:
                 break
 
         if bot2.getMarbles() > 0:
-            Roll(bot2, bot1)
+            Play(bot2, bot1)
             rotation += 1
-            if GameOver():
+            if bot2.getMarbles() == 0:
                 break
 
     print("--------------------------------------------")
-    print(f"Rotation {rotation} tries")
+    print(f"Bots played for {rotation} time(s) and the winner is")
     if bot1.getMarbles() > 0:
-        print(f"{bot1.getName()} has {bot1.getMarbles()} and is the winner")
+        print(f"{bot1.getName()} with {bot1.getMarbles()} marbles.")
     else:
-        print(f"{bot2.getName()} has {bot2.getMarbles()} and is the winner")
+        print(f"{bot2.getName()} with {bot2.getMarbles()} marbles.")
