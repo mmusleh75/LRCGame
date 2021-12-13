@@ -14,67 +14,70 @@ class Player():
 guessList = ["Odd", "Even"]
 
 def GameOver():
-    if player1.getMarbles() > 0 and player2.getMarbles() > 0:
+    if bot1.getMarbles() > 0 and bot2.getMarbles() > 0:
         return False
     else:
         return True
 
-def Roll(playingPlayer, opponentPlayer):
-    print(f"{player1.getName()} has {player1.getMarbles()}")
-    print(f"{player2.getName()} has {player2.getMarbles()}")
+def Roll(playingBot, opponentBot):
+    print(f"{bot1.getName()} has {bot1.getMarbles()}")
+    print(f"{bot2.getName()} has {bot2.getMarbles()}")
 
-    playerInHand = random.randint(1, playingPlayer.getMarbles())
+    playingBotHolds = random.randint(1, playingBot.getMarbles())
+    opponentBotGuess = random.choice(guessList)
 
-    opponentPlayerGuess = random.choice(guessList)
+    playingBotHas = "Odd"
+    if playingBotHolds % 2 == 0:
+        playingBotHas = "Even"
 
-    playerHolding = "Odd"
-    if playerInHand % 2 == 0:
-        playerHolding = "Even"
-
-    print(f"{playingPlayer.getName()} is holding {playerInHand} ({playerHolding}), {opponentPlayer.getName()} guessed ({opponentPlayerGuess})")
+    print(f"{playingBot.getName()} is holding {playingBotHolds} ({playingBotHas}), {opponentBot.getName()} guessed ({opponentBotGuess})")
 
     # if the answer is correct
-    if opponentPlayerGuess == playerHolding:
-        if playingPlayer.getMarbles() < playerInHand:
-            print(f"{playingPlayer.getName()} does not have enough, moving {playingPlayer.getMarbles()} from {playingPlayer.getName()} to {opponentPlayer.getName()}")
-            opponentPlayer.marbles += playingPlayer.getMarbles()
-            playingPlayer.marbles = 0
+    if opponentBotGuess == playingBotHas:
+        if playingBot.getMarbles() < playingBotHolds:
+            print(f"{playingBot.getName()} does not have enough, moving {playingBot.getMarbles()} from {playingBot.getName()} to {opponentBot.getName()}")
+            opponentBot.marbles += playingBot.getMarbles()
+            playingBot.marbles = 0
         else:
-            print(f"moving {playerInHand} from {playingPlayer.getName()} to {opponentPlayer.getName()}")
-            opponentPlayer.marbles += playerInHand
-            playingPlayer.marbles -= playerInHand
+            print(f"moving {playingBotHolds} from {playingBot.getName()} to {opponentBot.getName()}")
+            opponentBot.marbles += playingBotHolds
+            playingBot.marbles -= playingBotHolds
 
     else: # if the answer is wrong
-        if opponentPlayer.getMarbles() < playerInHand:
-            print(f"{opponentPlayer.getName()} does not have enough, moving {opponentPlayer.getMarbles()} from {opponentPlayer.getName()} to {playingPlayer.getName()}")
-            playingPlayer.marbles += opponentPlayer.getMarbles()
-            opponentPlayer.marbles = 0
+        if opponentBot.getMarbles() < playingBotHolds:
+            print(f"{opponentBot.getName()} does not have enough, moving {opponentBot.getMarbles()} from {opponentBot.getName()} to {playingBot.getName()}")
+            playingBot.marbles += opponentBot.getMarbles()
+            opponentBot.marbles = 0
         else:
-            print(f"moving {playerInHand} from {opponentPlayer.getName()} to {playingPlayer.getName()}")
-            playingPlayer.marbles += playerInHand
-            opponentPlayer.marbles -= playerInHand
+            print(f"moving {playingBotHolds} from {opponentBot.getName()} to {playingBot.getName()}")
+            playingBot.marbles += playingBotHolds
+            opponentBot.marbles -= playingBotHolds
 
 if __name__ == "__main__":
 
-    player1 = Player("John", 5)
-    player2 = Player("Steve", 5)
+    bot1 = Player("John", 1000)
+    bot2 = Player("Steve", 1000)
 
     # the values for the two players can be replaced with input()
 
+    rotation = 0
     while True:
 
-        if player1.getMarbles() > 0:
-            Roll(player1, player2)
+        if bot1.getMarbles() > 0:
+            Roll(bot1, bot2)
+            rotation += 1
             if GameOver():
                 break
 
-        if player2.getMarbles() > 0:
-            Roll(player2, player1)
+        if bot2.getMarbles() > 0:
+            Roll(bot2, bot1)
+            rotation += 1
             if GameOver():
                 break
 
     print("--------------------------------------------")
-    if player1.getMarbles() > 0:
-        print(f"{player1.getName()} has {player1.getMarbles()} and is the winner")
+    print(f"Rotation {rotation} tries")
+    if bot1.getMarbles() > 0:
+        print(f"{bot1.getName()} has {bot1.getMarbles()} and is the winner")
     else:
-        print(f"{player2.getName()} has {player2.getMarbles()} and is the winner")
+        print(f"{bot2.getName()} has {bot2.getMarbles()} and is the winner")
